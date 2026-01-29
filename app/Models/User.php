@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role; // Import Model Role
 
 class User extends Authenticatable
 {
@@ -44,5 +45,48 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // --- LOGIKA ROLE & AUTHENTICATION ---
+
+    /**
+     * Relasi Many-to-Many ke Role.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Helper untuk cek role tertentu.
+     */
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    /**
+     * Cek apakah user adalah Staff (Akses Dashboard Backend).
+     */
+    public function isStaff(): bool
+    {
+        return $this->roles()->whereIn('name', [
+            'super-admin', 
+            'admin-donasi', 
+            'admin-psb', 
+            'admin-media'
+        ])->exists();
+    }
+
+    /**
+     * Cek apakah user adalah User Umum (Akses Portal Frontend).
+     */
+    public function isPortalUser(): bool
+    {
+        return $this->roles()->whereIn('name', [
+            'donatur', 
+            'wali-santri', 
+            'alumni'
+        ])->exists();
     }
 }
