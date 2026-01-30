@@ -11,7 +11,7 @@
 
 <body class="bg-gray-50 font-sans antialiased">
     <div class="flex h-screen overflow-hidden">
-        <aside class="w-64 bg-slate-900 text-white flex-shrink-0 flex flex-col">
+        <aside class="w-64 bg-slate-900 text-white shrink-0 flex flex-col">
             <div class="p-6 text-xl font-bold border-b border-slate-800">
                 CORE MULTAZAM
             </div>
