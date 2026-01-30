@@ -23,6 +23,9 @@ Route::post('/logout', function () {
 // 3. Area Admin (Protected)
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+
+    Route::get('/admin/dashboard', \App\Livewire\Admin\Dashboard::class)->name('admin.dashboard');
+    Route::get('/admin/donations', \App\Livewire\Admin\Donation\Index::class)->name('admin.donations.index'); // Tambahkan rute ini
     
     // Nanti modul Donasi, PSB, dll akan masuk di sini
 });
