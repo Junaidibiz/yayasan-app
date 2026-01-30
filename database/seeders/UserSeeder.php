@@ -11,19 +11,21 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Buat Akun Admin
+        // 1. Buat User Admin
         $admin = User::firstOrCreate(
             ['email' => 'admin@multazam.com'],
             [
                 'name' => 'Super Admin Multazam',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password123'), // Gunakan password ini untuk login
             ]
         );
 
-        // Tempelkan Role Super Admin
-        $role = Role::where('name', 'super-admin')->first();
-        if ($role) {
-            $admin->roles()->syncWithoutDetaching([$role->id]);
+        // 2. Ambil data Role Super Admin dari database
+        $roleAdmin = Role::where('name', 'super-admin')->first();
+
+        // 3. Hubungkan User dengan Role tersebut
+        if ($roleAdmin) {
+            $admin->roles()->syncWithoutDetaching([$roleAdmin->id]);
         }
     }
 }
