@@ -16,8 +16,16 @@
                 CORE MULTAZAM
             </div>
             <nav class="flex-1 p-4 space-y-2">
-                <a href="#" class="block p-3 rounded-lg bg-slate-800 text-blue-400">Dashboard</a>
-                <a href="#" class="block p-3 rounded-lg hover:bg-slate-800">Donasi</a>
+                <a href="{{ route('admin.dashboard') }}"
+                    class="block p-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('admin.dashboard') ? 'bg-slate-800 text-blue-400' : '' }}">
+                    Dashboard
+                </a>
+
+                <a href="{{ route('admin.donations.index') }}"
+                    class="block p-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('admin.donations.*') ? 'bg-slate-800 text-blue-400' : '' }}">
+                    Donasi
+                </a>
+
                 <a href="#" class="block p-3 rounded-lg hover:bg-slate-800">Data Santri (PSB)</a>
             </nav>
             <div class="p-4 border-t border-slate-800">

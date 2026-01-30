@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Login;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Donation\Index as DonationIndex;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +24,5 @@ Route::post('/logout', function () {
 // 3. Area Admin (Protected)
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
-
-    Route::get('/admin/dashboard', \App\Livewire\Admin\Dashboard::class)->name('admin.dashboard');
-    Route::get('/admin/donations', \App\Livewire\Admin\Donation\Index::class)->name('admin.donations.index'); // Tambahkan rute ini
-    
-    // Nanti modul Donasi, PSB, dll akan masuk di sini
+    Route::get('/admin/donations', DonationIndex::class)->name('admin.donations.index'); 
 });
